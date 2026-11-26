@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Fan Control Center
+GenericName=Fan and Power Profile Control
+Comment=Select cooling profiles, monitor temperatures and control CPU throttling
+Exec=fan-control-center
+Icon=fan-control-center
+Terminal=false
+Categories=Settings;HardwareSettings;
+Keywords=fan;cooling;temperature;CPU;GPU;power;profile;throttle;ASUS;
+StartupNotify=true

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Fan Monitor
+Comment=Show live fan RPM and CPU temperature in the taskbar system tray
+Exec=fan-monitor
+Icon=fan-control-center
+Terminal=false
+Categories=System;Monitor;
+Keywords=fan;RPM;temperature;CPU;taskbar;tray;
+StartupNotify=false

@@ -1,0 +1,41 @@
+[Unit]
+Description=Fan Control Center ASUS fan only; CPU and platform managed by TLP
+After=systemd-udevd.service tlp.service
+Wants=tlp.service
+ConditionPathExists=/sys/devices/platform/asus-nb-wmi
+
+[Service]
+Type=simple
+ExecStart=@FANCTL@ --uid @UID@ --state /var/lib/fan-control-center/tlp-fan-settings --daemon
+ExecStopPost=@FAN_AUTO@
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=8
+RuntimeDirectory=fan-control-center
+RuntimeDirectoryMode=0755
+StateDirectory=fan-control-center
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+# access(W_OK) and writes to CPU/platform attributes fail on these read-only mounts.
+# Only the verified ASUS device subtree is opened for hardware writes.
+ReadOnlyPaths=/sys
+ReadWritePaths=/sys/devices/platform/asus-nb-wmi /run/fan-control-center /var/lib/fan-control-center
+RestrictAddressFamilies=AF_UNIX
+CapabilityBoundingSet=CAP_DAC_OVERRIDE CAP_CHOWN CAP_FOWNER
+RestrictSUIDSGID=yes
+RestrictNamespaces=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target
